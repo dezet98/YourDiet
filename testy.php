@@ -1,0 +1,5 @@
+<?php
+
+echo dirname( 'DIR');
+
+?>
