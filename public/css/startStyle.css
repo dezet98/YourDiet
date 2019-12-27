@@ -1,0 +1,83 @@
+#logoAndOption
+{
+    position: relative;
+    float: left;
+    width: 35%;
+    height: 100%;
+}
+
+#logoAndOption:after
+{
+    content: "";
+    background: url(../img/food.png) no-repeat center; 
+    background-size: cover;
+    position: absolute;
+    opacity: 0.80;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1; 
+}
+
+#logo 
+{
+    margin: 19% auto;
+    width: 70%;
+}
+
+.imgLogo 
+{
+    width: 100%;
+    height: auto;
+}
+
+#option
+{
+    position: fixed;
+    top: 60%;
+    left: 10%;
+    right: auto;
+    width: 15%;
+}
+
+.submitInput
+{
+    width: 100%;
+}
+
+#content
+{
+    background: url(../img/content.jpg) no-repeat center;
+    background-size: cover;
+    width: 65%;
+    height: 100%;
+    float: left;
+}
+
+@media only screen and (max-width: 768px)
+{
+    #content
+    {
+         display: none;
+    }
+
+    #logoAndOption
+    {
+        width: 100%;
+    }
+
+    #logo
+    {
+        margin: 18% auto;
+        width: 60%;
+    }
+
+    #option
+    {
+        width: 40%;
+        left: 0;
+        right: 0;
+        margin: auto;
+    }
+}

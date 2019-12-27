@@ -1,0 +1,82 @@
+.container-fluix
+{
+    margin: 0;
+    max-width: unset;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: inherit;
+    align-items: center;
+   
+}
+
+.container-fluix::after
+{
+    content: "";
+    background: url("../img/mainBackground.jfif") no-repeat center;
+    background-size: cover;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1; 
+}
+
+.logo 
+{
+    margin: 3% auto;
+    width: 100%;
+    margin-bottom: 55%;
+}
+
+.imgLogo 
+{
+    width: 100%;
+    height: auto;
+}
+
+form
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    top: 15%;
+}
+
+label
+{    
+    width: 80%;
+    color: #3b3939;
+    font-size: 120%;
+}
+
+.textInput
+{
+    width: 80%;
+    padding: 2%;
+    margin-bottom: 6%;
+    border: 1px solid #707070;
+}
+
+.textInput::placeholder
+{
+    color: #707070;
+}
+
+.submitInput
+{
+    width: 80%;
+    font-size: 120%;
+    padding: 3%;
+    background: #707070;
+    color: #FFFFFF;
+}
+
+.submitInput:hover
+{
+    background: #3b3939;
+    border-color: #3b3939;
+}

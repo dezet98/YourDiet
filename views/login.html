@@ -8,50 +8,26 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="../public/css/globalStyle.css" type="text/css"/>
         <link rel="stylesheet" href="../public/css/loginStyle.css" type="text/css"/>
     </head>
-
     <body>
-        <div class="container-flix">
-                <div class="row row-no-gutters">
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/1.jpg"/>
+        <div class="container-fluix">
+            <div class="row row-no-gutters">
+                <div class="col-xs-3 col-sm-4"></div>
+                <div class="col-xs-6 col-sm-4"> 
+                    <div class="logo">
+                        <img class="imgLogo" src="../public/img/fullLogo.png" alt="logo"/>
                     </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/2.jpg"/>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/3.jpg"/>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/4.jpg"/>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/5.jpg"/>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/6.jpg"/>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/7.jpg"/>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/8.jpg"/>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/9.jpg"/>
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/10.jpg" />
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/11.jpg" />
-                    </div>
-                    <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                        <img src="../public/img/foodBackground/12.jpg" />
-                    </div>    
+                    <form action="signIn" method="POST">
+                        <input class="textInput" name="email" type="email" placeholder="e-mail"/>
+                        <input class="textInput" name="password" type="password" placeholder="hasło" />
+                        <input class="submitInput" type="submit" value="Zaloguj się" />
+                    </form>
                 </div>
+                <div class="col-xs-3 col-sm-4"></div>
             </div>
+        </div>
     </body>
     
 </html>
