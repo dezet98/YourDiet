@@ -73,3 +73,9 @@ form
     background: #3b3939;
     border-color: #3b3939;
 }
+
+label
+{
+    color: #3b3939;
+    width: 80%;
+}

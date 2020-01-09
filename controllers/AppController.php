@@ -6,8 +6,8 @@ class AppController
 
     function __construct()
     {
-        $this->request = strtolower($SERVER['REQUEST METHOD']);
-        echo "request = " . $request;
+        $this->request = strtolower($_SERVER['REQUEST_METHOD']);
+        session_start();
     }
 
     function isGet()
@@ -17,12 +17,12 @@ class AppController
 
     function isPost()
     {
-        return $this->request === 'set';
+        return $this->request === 'post';
     }
 
-    function render($variables = [], $fileName = null)
+    function render(string $fileName = null, array $variables = [])
     {
-        $templatePath = $fileName ? dirname('DIR') . '\views\\' . get_class($this) . '\\' . $fileName . '.php' : '';
+        $templatePath = $fileName ? dirname('__DIR__') . '\views' . '\\' . $fileName . '.php' : '';
         $output = 'File not found';
 
         if(file_exists($templatePath))
@@ -35,9 +35,7 @@ class AppController
         }
 
         print $output;
-    
     }
 }
-
 
 ?>

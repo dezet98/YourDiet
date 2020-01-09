@@ -1,21 +1,17 @@
-body 
+#heh
 {
-    width: 100%;
-    height: 100%;
-    background-color: pink;
-    overflow: hidden;
+  display: none;
 }
 
-.container-flix
+#second
 {
-     width: 100%;
-     height: 100%;
-     opacity: 0.7;
+  background-color: lawngreen;
+  display: none;
 }
 
-img
+#second:target
 {
-    width: 100%;
-    height: auto;
-}
+  display: block;
 
+
+}

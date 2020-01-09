@@ -8,8 +8,8 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-        <link rel="stylesheet" href="../public/css/globalStyle.css" type="text/css"/>
-        <link rel="stylesheet" href="../public/css/registerStyle.css" type="text/css"/>
+        <link rel="stylesheet" href="public/css/globalStyle.css" type="text/css"/>
+        <link rel="stylesheet" href="public/css/registerStyle.css" type="text/css"/>
     </head>
     <body>
         <div class="container-fluix">
@@ -17,9 +17,9 @@
                 <div class="col-xs-3 col-sm-4 icon"></div>
                 <div class="col-xs-6 col-sm-4"> 
                     <div class="logo">
-                        <img class="imgLogo" src="../public/img/fullLogo.png" alt="logo"/>
+                        <img class="imgLogo" src="public/img/fullLogo.png" alt="logo"/>
                     </div>
-                    <form action="signIn" method="POST">
+                    <form action="?page=register" method="POST">
                         <label>Twój e-mail:</label>
                         <input class="textInput" name="email" type="email"/>
                         <label>Nazwa użytkownika:</label>

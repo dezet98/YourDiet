@@ -1,56 +1,41 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="testy.css" type="text/css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <link rel="stylesheet" href="testy.css">
+  <title>
+    Rozsuwane menu boczne w samym CSS 
+  </title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+ 
 </head>
-
-<body>
-    <div class="container-flix">
-        <div class="row row-no-gutters">
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/1.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/2.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/3.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/4.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/5.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/6.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/7.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/8.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/9.jpg"/>
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/10.jpg" />
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/11.jpg" />
-            </div>
-            <div class="col-lg-2 col-md-4 col-sm-6 col-xs-6">
-                <img src="public/img/foodBackground/12.jpg" />
-            </div>    
-        </div>
+<body style="margin: 0; padding: 0;">
+  <div class="container-fluix">
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-2" style="background-color: red;">
+        1 of 3
+      </div>
+      <div class="col-md-auto" style="background-color: blue;">
+        Variable width content
+      </div>
+      <div class="col col-lg-2" style="background-color: black;">
+        3 of 3
+      </div>
     </div>
-
+    <div class="row">
+      <div class="col">
+        1 of 3
+      </div>
+      <div class="col-md-auto">
+        Variable width content
+      </div>
+      <div class="col col-lg-2">
+        3 of 3
+      </div>
+    </div>
+  </div>
 </body>
 </html>
-
