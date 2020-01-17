@@ -1,0 +1,365 @@
+.container-fluix
+{
+    position: fixed;
+    right: 0;
+    width: 85%;
+    justify-content: center;
+    height: inherit;
+    align-items: center;
+}
+
+.container-fluix::after
+{
+    content: "";
+    background: url("../img/mainBackground.jfif")  center;
+    background-size: cover;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1; 
+}
+
+.mobileMenu
+{
+    display: none;
+    width: 100%;
+    height: 6%;
+    background-color: #3b3939;
+}
+
+.mobileMenu label
+{
+    color: #FFFFFF;
+}
+
+.mobileMenu button
+{
+    color: black;
+}
+
+.menu
+{
+    position: fixed;
+    float: left;
+    height: 100%;
+    width: 15%;
+    left: 0;
+    background-color: #EBE9E9;
+    border: 1px solid #707070;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu .logo
+{
+    width: 90%;
+    margin-top: 30%;
+}
+
+.menu .subpages
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70%;
+}
+
+.menu .subpages a
+{
+    text-decoration: none;
+}
+
+.menu .subpages .submitInput
+{
+    width: 100%;
+    text-align: center;
+    font-size: 95%;
+    margin-bottom: 13%;
+    border-radius: 0;
+    border: none;
+    list-style-type: none;
+}
+
+.menu .logOut
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.menu .logOut input
+{
+    width: 100%;
+    background: #707070;
+    padding: 5%;
+    border: 1px solid #707070;
+    font-size: 100%;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.menu .logOut input:hover
+{  
+    background: #3b3939;
+}
+
+.leftBox
+{
+    background-color: #EBE9E9;
+    margin-top: 3%;
+    height: 110%;
+}
+
+.leftBox .search
+{
+    width: 60%;
+    margin-top: 3%;
+    float: left;
+}
+
+.leftBox .search #text
+{
+    width: 80%;
+}
+
+.leftBox .search #searchButton
+{
+    width: 20%;
+}
+
+.leftBox #checkbox
+{
+    width: 40%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    float: left;
+    text-align: right;
+}
+
+.leftBox #results
+{
+    clear: both;
+    display: flex;
+    flex-wrap: wrap;
+    height: 95%;
+    padding: 4%;
+    overflow: scroll;
+    
+}
+
+.leftBox #results .dish 
+{
+    position: relative;
+    width: 40%;
+    height: 20%;
+    border: 1px solid black;
+    padding: 4%;
+    margin: 5%;
+} 
+
+.leftBox #results .dish .plus
+{
+  position: absolute;
+  font-size: 80px;
+  left: 25%;
+  margin-left: -40px;
+  top: 50%;
+  margin-top: -40px;
+  z-index: 1;
+  cursor: pointer;
+  display: none;
+}
+
+.leftBox #results .dish .eye
+{
+  position: absolute;
+  font-size: 80px;
+  left: 75%;
+  margin-left: -40px;
+  top: 50%;
+  margin-top: -40px;
+  z-index: 1;
+  cursor: pointer;
+  display: none;
+}
+
+.leftBox #results .dish .imgBox
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    top: 0;
+}
+
+.leftBox #results .dish .imgBox img
+{
+    object-fit: cover; 
+    width: 100%;
+    height: 100%;
+}
+
+.leftBox #results .dish .textBox 
+{
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    background-color: white;
+}
+
+.leftBox #results .dish .textBox h3
+{
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    top:0;
+    margin: 0;
+    padding: 3%;
+    text-align: center;
+}
+
+.leftBox #results .dish .textBox .proparationTime
+{
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 45%;
+    bottom: 0;
+    margin: 0;
+    padding: 5%;
+    text-align: center;
+}
+
+.leftBox #results .dish .textBox .calories
+{
+    box-sizing: border-box;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 25%;
+    bottom: 0;
+    margin: 0;
+    padding: 5%;
+}
+
+.rightBox
+{
+    margin-top: 3%;
+    border: solid 1px;
+    height: 110%;
+    padding: 0;
+}
+
+.rightBox .daysSlider 
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.rightBox .daysSlider .arrow
+{
+    color: #3b3939;
+    cursor: pointer;
+}
+
+.rightBox .daysSlider #dayName
+{
+    color: #3b3939;
+    font-size: 120%;
+    margin: auto;
+}
+
+.rightBox .tabButtons
+{
+    margin-top: 4%;
+}
+
+.rightBox .tabButtons .off
+{
+    width: 50%;
+    background: #FFFFFF;
+    border: none;
+    font-size: 130%;
+    color: #3b3939;
+    transition-duration: 0.4s;
+}
+
+.rightBox .tabButtons .off:hover
+{
+    background: #3b3939;
+    color: #FFFFFF;
+}
+
+.rightBox .tabButtons .on
+{
+    width: 50%;
+    background: #3b3939;
+    border: none;
+    font-size: 130%;
+    color: #FFFFFF;
+    transition-duration: 0.4s;
+    cursor: default;
+}
+
+.rightBox .tab
+{
+    height: 100%;
+}
+
+
+@media only screen and (max-width: 768px)
+{
+    .mobileMenu
+    {
+        display: inline-block;
+    }
+
+    .container-fluix
+    {
+        width: 100%;
+    }
+
+    .menu
+    {
+        transform: translateX(-100%);
+        width: 50%;
+        z-index: 1; 
+    }
+
+    .menu .menuLogo
+    {
+        width: 70%;
+        margin-top: 15%;
+    }
+
+    .menuList .submitInput
+    {
+        font-size: 95%;
+        margin-bottom: 2%;
+    }
+
+    .menuLogOut
+    {
+        margin-bottom: 14%;
+    }
+
+        .leftBox .search
+    {
+        width: 100%;
+    }
+
+    .leftBox #checkbox
+    {
+        width: 100%;
+    }
+}
+

@@ -13,9 +13,8 @@
     </head>
     <body>
         <div class="container-fluix">
-            <div class="row row-no-gutters">
-                <div class="col-xs-3 col-sm-4"></div>
-                <div class="col-xs-6 col-sm-4"> 
+            <div class="row">
+                <div class="col-xs-6 col-sm-4 col-xs-offset-3 col-sm-offset-4"> 
                     <div class="logo">
                         <img class="imgLogo" src="public/img/fullLogo.png" alt="logo"/>
                     </div>
@@ -36,7 +35,6 @@
                         <input class="submitInput" type="submit" value="Zaloguj się" />
                     </form>
                 </div>
-                <div class="col-xs-3 col-sm-4"></div>
             </div>
         </div>
     </body>

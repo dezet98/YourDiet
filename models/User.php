@@ -1,25 +1,25 @@
 <?php
 
 class User {
-    private $id;
+    private $id_user;
     private $email;
     private $password;
-    private $name;
-    private $surname;
+    private $nickname;
+    private $id_plan;
     private $role = ['ROLE_USER'];
 
-    public function __construct(string $email, string $password, string $name, string $surname, int $id = null)
+    public function __construct(string $email, string $password, string $nickname, string $id_plan, int $id_user = null)
     {
         $this->email = $email;
         $this->password = $password;
-        $this->name = $name;
-        $this->surname = $surname;
-        $this->id = $id;
+        $this->nickname = $nickname;
+        $this->id_plan = $id_plan;
+        $this->id_user = $id_user;
     }
 
-    public function getId(): int
+    public function getId_user(): int
     {
-        return $this->id;
+        return $this->id_user;
     }
 
     public function getPassword(): string
@@ -32,20 +32,21 @@ class User {
         return $this->email;
     }
 
+    public function getNickname(): string
+    {
+        return $this->nickname;
+    }
+
+    public function getId_plan(): string
+    {
+        return $this->id_plan;
+    }
+
     public function getRole(): array
     {
         return $this->role;
     }
-
-    public function getName(): string
-    {
-        return $this->name;
-    }
-
-    public function getSurname(): string
-    {
-        return $this->surname;
-    }
+    
 }
 
 ?>

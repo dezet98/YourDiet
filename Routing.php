@@ -1,6 +1,9 @@
 <?php
 
 require_once('controllers/DefaultController.php');
+require_once('controllers/LoginController.php');
+require_once('controllers/RegisterController.php');
+require_once('controllers/YourScheduleController.php');
 
 class Routing
 {
@@ -10,10 +13,10 @@ class Routing
     {
         $this->routes = [
             'start' => ['controller' => 'DefaultController', 'action' => 'start'],
-            'login' => ['controller' => 'DefaultController', 'action' => 'login'],
-            'logOut' => ['controller' => 'DefaultController', 'action' => 'logOut'],
-            'register' => ['controller' => 'DefaultController', 'action' => 'register'],
-            'main' => ['controller' => 'DefaultController', 'action' => 'main']
+            'login' => ['controller' => 'LoginController', 'action' => 'login'],
+            'logOut' => ['controller' => 'LoginController', 'action' => 'logOut'],
+            'register' => ['controller' => 'RegisterController', 'action' => 'register'],
+            'yourSchedule' => ['controller' => 'YourScheduleController', 'action' => 'getDishes']
                         ];
     }
 

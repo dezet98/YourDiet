@@ -14,6 +14,17 @@
                 <img class="imgLogo" src="public/img/fullLogo.png" alt="logo"/>
             </div>
             <div id="option">
+                <label>
+                    <?php
+                        if(isset($messages))
+                        {
+                            foreach($messages as $message)
+                            {
+                                echo $message;
+                            }
+                        }
+                    ?>
+                </label>
                 <a href="?page=login">
                     <input class="submitInput" type="submit" value="Zaloguj się"/>
                 </a>

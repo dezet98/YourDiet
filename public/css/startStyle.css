@@ -41,6 +41,18 @@
     width: 15%;
 }
 
+label
+{
+    box-sizing: border-box;
+    width: 15%;
+    position: fixed;
+    text-align: center;
+    top: 54%;
+    font-size: 80%;
+    color: #ffffff;
+    background-color: #3b3939;
+}
+
 .submitInput
 {
     width: 100%;
@@ -79,5 +91,10 @@
         left: 0;
         right: 0;
         margin: auto;
+    }
+
+    label
+    {
+        width: 40%;
     }
 }
