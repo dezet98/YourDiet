@@ -85,32 +85,64 @@ function openTab(name) {
 // this is for show plus, eye icons when user has a cursor on dish. 
 // Here we have too functions to react when user click plus or eye
 $(document).ready(function(){
-    $(".dish").mouseenter(function(){
-        $(this).find(".imgBox img").css("opacity", "0.4");
-        $(this).find(".plus").css("display", "inline"); 
-        $(this).find(".textBox").css("opacity", "0.4");
-        $(this).find(".eye").css("display", "inline");
-       
-        $(".plus").click(function(){
-            var nazwa = $(this).find("h3").text();   //musze znalezc rodzica bo tylko wtedy zadziala
-            alert("Nazwa= " + nazwa);
+    $(".container-fluix").on("mouseenter", ".dish", function(){     // function "on" is necessary
+        $(this).find(".imgBox, .textBox").css("opacity", "0.4");
+        $(this).find(".plus, .eye, .minus").show();
+    });
+    
+    $(".container-fluix").on("mouseleave", ".dish", function(){
+        $(this).find(".imgBox, .textBox").css("opacity", "1");
+        $(this).find(".plus, .eye, .minus").hide();
+    });
 
-        });
+    $(".container-fluix").on("click", ".eye", function(){
+        var imageSrc = $(this).parent().find(".dishImg").attr('src');
+        var name = $(this).parent().find(".name").text();
+        var preparationTime = $(this).parent().find(".preparationTime").text();
+        var calories = $(this).parent().find(".calories").text();
+
+        $(".content").find("#dishImg").attr("src", imageSrc);
+        $(".content").find("#name").text(name);
+        $(".content").find("#preparationTime").text(preparationTime);
+        $(".content").find("#calories").text(calories);
         
-        $(".eye").click(function(){
-            alert("wyswietl");
-        });
-
+        $(".modal").show();
     });
-    
-    $(".dish").mouseleave(function(){
-        $(this).find(".imgBox img").css("opacity", "1");
-        $(this).find(".plus").css("display", "none"); 
-        $(this).find(".textBox").css("opacity", "1");
-        $(this).find(".eye").css("display", "none"); 
+
+    $(".closeModal").click(function(){
+        $(".modal").hide();
     });
-    
+
+    $(window).on("click", function(e){
+        if (e.target.id != $("#modalId").prop('id'))
+        {
+            //alert("elo");
+        }
+        else
+        {
+            $(".modal").hide();
+        }
+    });
+
+    $(".plus").click(function(){
+        var imageSrc = $(this).parent().find(".dishImg").attr('src');
+        var name = $(this).parent().find(".name").text();
+        var preparationTime = $(this).parent().find(".preparationTime").text();
+        var calories = $(this).parent().find(".calories").text();
+
+        var newDish = $("template").contents().clone(true);
+        $("#schedule").append(newDish);    // we have to use contents(), function childrens() doesn't work well
+        
+        newDish.find(".dishImg").attr("src", imageSrc);
+        newDish.find(".name").text(name);
+        newDish.find(".preparationTime").text(preparationTime);
+        newDish.find(".calories").text(calories);
+    });
 
 
-  });
+    $("#schedule").on("click", ".minus", function(){
+        $(this).parent().remove();  // in this case $(this).parent() give us ".dish"
+    });
+
+  }); 
   

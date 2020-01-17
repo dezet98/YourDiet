@@ -108,6 +108,26 @@
     background: #3b3939;
 }
 
+.modal
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+.modal .content
+{
+    background-color: #FFFFFF;
+    width: 80%;
+    height: 80%;
+    margin: 10% auto;
+    padding: 20px;
+    border: 1px solid #707070;
+}
+
+
 .leftBox
 {
     background-color: #EBE9E9;
@@ -148,7 +168,7 @@
     flex-wrap: wrap;
     height: 95%;
     padding: 4%;
-    overflow: scroll;
+    overflow: auto;
     
 }
 
@@ -226,7 +246,7 @@
     text-align: center;
 }
 
-.leftBox #results .dish .textBox .proparationTime
+.leftBox #results .dish .textBox .preparationTime
 {
     box-sizing: border-box;
     position: absolute;
@@ -256,6 +276,7 @@
     border: solid 1px;
     height: 110%;
     padding: 0;
+    overflow: auto;
 }
 
 .rightBox .daysSlider 
@@ -315,6 +336,103 @@
     height: 100%;
 }
 
+
+.rightBox #schedule .dish 
+{
+    position: relative;
+    width: 90%;
+    height: 15%;
+    border: 1px solid black;
+    padding: 4%;
+    margin: 5%;
+} 
+
+.rightBox #schedule .dish .minus
+{
+  position: absolute;
+  font-size: 80px;
+  left: 25%;
+  margin-left: -40px;
+  top: 50%;
+  margin-top: -40px;
+  z-index: 1;
+  cursor: pointer;
+  display: none;
+}
+
+.rightBox #schedule .dish .eye
+{
+  position: absolute;
+  font-size: 80px;
+  left: 75%;
+  margin-left: -40px;
+  top: 50%;
+  margin-top: -40px;
+  z-index: 1;
+  cursor: pointer;
+  display: none;
+}
+
+.rightBox #schedule .dish .imgBox
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 50%;
+    top: 0;
+}
+
+.rightBox #schedule .dish .imgBox img
+{
+    object-fit: cover; 
+    width: 100%;
+    height: 100%;
+}
+
+.rightBox #schedule .dish .textBox 
+{
+    position: absolute;
+    width: 50%;
+    bottom: 0;
+    right: 0;
+    top: 0;
+    background-color: white;
+}
+
+.rightBox #schedule .dish .textBox h3
+{
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 60%;
+    top:0;
+    margin: 0;
+    padding: 3%;
+    text-align: center;
+}
+
+.rightBox #schedule .dish .textBox .preparationTime
+{
+    box-sizing: border-box;
+    position: absolute;
+    width: 100%;
+    height: 45%;
+    bottom: 0;
+    margin: 0;
+    padding: 5%;
+    text-align: center;
+}
+.rightBox #schedule .dish .textBox .calories
+{
+    box-sizing: border-box;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    height: 25%;
+    bottom: 0;
+    margin: 0;
+    padding: 5%;
+}
 
 @media only screen and (max-width: 768px)
 {

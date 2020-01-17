@@ -24,7 +24,6 @@
 </head>
 
 <body>
-    
     <div class="mobileMenu"> 
         <button id="menu-trigger" onclick="menuTrigger()"> ham </button>
         <label> Twój plan <label>
@@ -53,7 +52,16 @@
 
     <div class="container-fluix">
         <div class="row" style="height: 85%;">
-
+            <div id="modalId" class="modal">
+                <div class="content">
+                    <i class="fa fa-times closeModal"> </i>
+                    <img id="dishImg" alt="img" onerror="this.src='public/img/uploads/food10.jpg'" style="width: 30%; height: auto;"> </img>
+                    <h1 id="name"> </h1>
+                    <h4 id="preparationTime"> </h4>
+                    <h4 id="calories"> </h4>
+                    <label> </label>
+                </div>
+            </div>
             <div class="col-xs-10 col-sm-6 col-xs-offset-1 leftBox">
                 <div class="search"> 
                     <input id="text" type="text" placeholder="Szukaj dania"></input><!--
@@ -65,15 +73,14 @@
                 <div id="results">
                     <?php  foreach($dishes as $dish) : ?>
                         <div class="dish">
-                            <i class="fa fa-plus plus">
-                                <h3>dsfds</h3> </i>
+                            <i class="fa fa-plus plus"> </i>
                             <i class="fa fa-eye eye"> </i>
                             <div class="imgBox">
-                                <img src="public/img/uploads/<?= $dish->getImage(); ?>" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
+                                <img class="dishImg" src="public/img/uploads/<?= $dish->getImage(); ?>" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
                             </div>
                             <div class="textBox">
-                                <h3> <?= $dish->getName(); ?> </h3>
-                                <h5 class="proparationTime"> <?= $dish->getPreparationTime(); ?> </h5>
+                                <h3 class="name"> <?= $dish->getName(); ?> </h3>
+                                <h5 class="preparationTime"> <?= $dish->getPreparationTime(); ?> </h5>
                                 <h5 class="calories"> *350cal </h5>
                             </div>
                         </div>
@@ -92,7 +99,20 @@
                     --><button id="statisticsButton" class="off" type="submit" onclick="openTab('statistics')">Statystyka</button>
                 </div>
                 <div id="schedule"  class="tab">
-                    <h5> Daniel jest boski </h5>
+                    <template>
+                        <div class="dish">
+                            <i class="fa fa-minus minus"> </i>
+                            <i class="fa fa-eye eye"> </i>
+                            <div class="imgBox">
+                                <img class="dishImg" src="public/img/uploads/nazwa" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
+                            </div>
+                            <div class="textBox">
+                                <h3 class="name"> Nazwa </h3>
+                                <h5 class="preparationTime"> proparationTime </h5>
+                                <h5 class="calories"> calories</h5>
+                            </div>
+                        </div>
+                    </template>
                 </div>
                 <div id="statistics" class="tab" style="display: none;">
                     <h5> tluszcze </h5>
