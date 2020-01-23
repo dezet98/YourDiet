@@ -1,0 +1,168 @@
+.container-fluix
+{
+    position: fixed;
+    right: 0;
+    width: 85%;
+    justify-content: center;
+    height: inherit;
+    align-items: center;
+}
+
+.container-fluix::after
+{
+    content: "";
+    background: url("../img/mainBackground.jfif")  center;
+    background-size: cover;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1; 
+}
+
+.mobileMenu
+{
+    display: none;
+    width: 100%;
+    height: 6%;
+    background-color: #3b3939;
+}
+
+.mobileMenu label
+{
+    color: #FFFFFF;
+}
+
+.mobileMenu button
+{
+    color: black;
+}
+
+.menu
+{
+    position: fixed;
+    float: left;
+    height: 100%;
+    width: 15%;
+    left: 0;
+    background-color: #EBE9E9;
+    border: 1px solid #707070;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu .logo
+{
+    width: 90%;
+    margin-top: 30%;
+}
+
+.menu .subpages
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70%;
+}
+
+.menu .subpages a
+{
+    text-decoration: none;
+}
+
+.menu .subpages .submitInput
+{
+    width: 100%;
+    text-align: center;
+    font-size: 95%;
+    margin-bottom: 13%;
+    border-radius: 0;
+    border: none;
+    list-style-type: none;
+}
+
+.menu .logOut
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.menu .logOut input
+{
+    width: 100%;
+    background: #707070;
+    padding: 5%;
+    border: 1px solid #707070;
+    font-size: 100%;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.menu .logOut input:hover
+{  
+    background: #3b3939;
+}
+
+
+.leftBox
+{
+    background-color: #EBE9E9;
+    margin-top: 3%;
+    height: 110%;
+}
+
+.rightBox
+{
+    margin-top: 3%;
+    border: solid 1px;
+    height: 110%;
+    padding: 0;
+    overflow: auto;
+}
+
+
+
+
+@media only screen and (max-width: 768px)
+{
+    .mobileMenu
+    {
+        display: inline-block;
+    }
+
+    .container-fluix
+    {
+        width: 100%;
+    }
+
+    .menu
+    {
+        transform: translateX(-100%);
+        width: 50%;
+        z-index: 1; 
+    }
+
+    .menu .menuLogo
+    {
+        width: 70%;
+        margin-top: 15%;
+    }
+
+    .menuList .submitInput
+    {
+        font-size: 95%;
+        margin-bottom: 2%;
+    }
+
+    .menuLogOut
+    {
+        margin-bottom: 14%;
+    }
+
+}
+

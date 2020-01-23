@@ -20,7 +20,7 @@ class Database {
     {
         try {
             $conn = new PDO("mysql:host=$this->host; dbname=$this->database", $this->username, $this->password);
-           
+            $conn -> query ('SET NAMES utf8');
             // set the PDO error mode to exception
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;

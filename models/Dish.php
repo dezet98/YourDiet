@@ -25,7 +25,7 @@ class Dish {
 
     public function getId_user(): int
     {
-        return $this->id_user;
+        return $this->id_user;  
     }
 
     public function getName(): string

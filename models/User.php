@@ -5,15 +5,13 @@ class User {
     private $email;
     private $password;
     private $nickname;
-    private $id_plan;
     private $role = ['ROLE_USER'];
 
-    public function __construct(string $email, string $password, string $nickname, string $id_plan, int $id_user = null)
+    public function __construct(string $email, string $password, string $nickname, int $id_user = null)
     {
         $this->email = $email;
         $this->password = $password;
         $this->nickname = $nickname;
-        $this->id_plan = $id_plan;
         $this->id_user = $id_user;
     }
 
@@ -35,11 +33,6 @@ class User {
     public function getNickname(): string
     {
         return $this->nickname;
-    }
-
-    public function getId_plan(): string
-    {
-        return $this->id_plan;
     }
 
     public function getRole(): array

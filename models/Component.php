@@ -1,6 +1,5 @@
 <?php
-
-class Component
+class Component implements JsonSerializable
 {
     private $id_component;
     private $name;
@@ -68,6 +67,23 @@ class Component
     public function getGluten(): int
     {
         return $this->gluten;
+    }
+
+    public function jsonSerialize()
+    {
+        $json = array(
+            'name' => $this->getName(),
+            'unit' => $this->getUnit(),
+            'calories' => $this->getCalories(),
+            'carbohydrate' => $this->getCarbohydrate(),
+            'fats' => $this->getFats(),
+            'protein' => $this->getProtein(),
+            'cholesterol' => $this->getCholesterol(),
+            'gluten' => $this->getGluten(),
+            'id_component' => $this->getId_component()
+        );
+
+        return $json;
     }
 }
 

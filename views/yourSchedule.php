@@ -37,7 +37,7 @@
         <div class="subpages">
             <a class="submitInput" href="#">Twój plan</a>
             <a class="submitInput" href="#">Lista zakupów</a>
-            <a class="submitInput" href="#">Stwórz danie</a>
+            <a class="submitInput" href="?page=createDish">Stwórz danie</a>
             <a class="submitInput" href="#">Szukaj dania</a>
             <a class="submitInput" href="#">Porady</a>
         </div>
@@ -71,10 +71,12 @@
                     <input type="checkbox">Podstawowe produkty</button>
                 </div>
                 <div id="results">
-                    <?php  foreach($dishes as $dish) : ?>
+
+                    <?php if(isset($dishes)) foreach($dishes as $dish) { ?>
                         <div class="dish">
                             <i class="fa fa-plus plus"> </i>
                             <i class="fa fa-eye eye"> </i>
+                            <input class="dishId" type="hidden" name="dishId" value="<?= $dish->getId_dish() ?>" />
                             <div class="imgBox">
                                 <img class="dishImg" src="public/img/uploads/<?= $dish->getImage(); ?>" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
                             </div>
@@ -84,7 +86,8 @@
                                 <h5 class="calories"> *350cal </h5>
                             </div>
                         </div>
-                    <?php endforeach; ?>
+                    <?php } ?>
+
                 </div>       
             </div>
 
@@ -99,15 +102,34 @@
                     --><button id="statisticsButton" class="off" type="submit" onclick="openTab('statistics')">Statystyka</button>
                 </div>
                 <div id="schedule"  class="tab">
+
+                    <?php if(isset($dishesOfDay)) foreach($dishesOfDay as $dishOfDay) { ?>
+                        <div class="dish">
+                            <i class="fa fa-minus minus"> </i>
+                            <i class="fa fa-eye eye"> </i>
+                            <input class="dishId" type="hidden" name="dishId" value="<?= $dishOfDay->getId_dish() ?>" />
+                            <div class="imgBox">
+                                <img class="dishImg" src="public/img/uploads/<?= $dishOfDay->getImage(); ?>" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
+                            </div>
+                            <div class="textBox">
+                                <h3 class="name"> <?= $dishOfDay->getName(); ?> </h3>
+                                <h5 class="preparationTime"> <?= $dishOfDay->getPreparationTime(); ?> </h5>
+                                <h5 class="calories"> *350cal </h5>
+                            </div>
+                        </div>
+                    <?php } ?>
+
+                    <!-- we use this template for create dynamically new divs:   --> 
                     <template>
                         <div class="dish">
                             <i class="fa fa-minus minus"> </i>
                             <i class="fa fa-eye eye"> </i>
+                            <input class="dishId" type="hidden" name="dishId" />
                             <div class="imgBox">
                                 <img class="dishImg" src="public/img/uploads/nazwa" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
                             </div>
                             <div class="textBox">
-                                <h3 class="name"> Nazwa </h3>
+                                <h3 class="name"> Name </h3>
                                 <h5 class="preparationTime"> proparationTime </h5>
                                 <h5 class="calories"> calories</h5>
                             </div>

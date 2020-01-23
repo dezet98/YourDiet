@@ -4,6 +4,8 @@ require_once('controllers/DefaultController.php');
 require_once('controllers/LoginController.php');
 require_once('controllers/RegisterController.php');
 require_once('controllers/YourScheduleController.php');
+require_once('controllers/AdminController.php');
+require_once('controllers/CreateDishController.php');
 
 class Routing
 {
@@ -16,7 +18,14 @@ class Routing
             'login' => ['controller' => 'LoginController', 'action' => 'login'],
             'logOut' => ['controller' => 'LoginController', 'action' => 'logOut'],
             'register' => ['controller' => 'RegisterController', 'action' => 'register'],
-            'yourSchedule' => ['controller' => 'YourScheduleController', 'action' => 'getDishes']
+            'yourSchedule' => ['controller' => 'YourScheduleController', 'action' => 'getDishes'],
+            'addToSchedule' => ['controller' => 'YourScheduleController', 'action' => 'addToSchedule'],
+            'removeFromSchedule' => ['controller' => 'YourScheduleController', 'action' => 'removeFromSchedule'],
+            'admin' => ['controller' => 'AdminController', 'action' => 'index'],
+            'adminUsers' => ['controller' => 'AdminController', 'action' => 'getUsers'],
+            'createDish' => ['controller' => 'CreateDishController', 'action' => 'createDish'],
+            'addDish' => ['controller' => 'CreateDishController', 'action' => 'addDish'],
+            'searchComponents' => ['controller' => 'CreateDishController', 'action' => 'searchComponents']
                         ];
     }
 

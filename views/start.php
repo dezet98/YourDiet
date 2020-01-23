@@ -31,7 +31,7 @@
                 <a href="?page=register">
                     <input class="submitInput" type="submit" value="Zarejestruj się"/>
                 </a>
-                <a href="?page=register">
+                <a href="?page=admin">
                     <input class="submitInput" type="submit" value="Zaloguj się jako gość"/>
                 </a>
             </div>
