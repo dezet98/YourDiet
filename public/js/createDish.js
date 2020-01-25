@@ -50,17 +50,30 @@ function changeBox() {
 $(document).ready(function(){
 
     $("#createDishButton").click(function(){
+        $("#createDishButton").prop("disabled", true);
+
         var name = $("#name").val();
         var preparationTime = $("#preparationTime").val();
         var description = $("#description").val();
+       
         var file = $("#file").val();
-        
+        // save in listOfComponents sequence: "dishId1:amount dishId2:amount2 dishId3:amount3 ..."
         var listOfComponents = $("#dishComponents").find(".componentId").map(function() {
-                return $(this).val();
+                return ($(this).val() + ':' + $(this).parent().find(".amount").val());
             }).get().join(' ');
+        console.log(listOfComponents);
+        // create array, so we have:  (dishId1:amount, dishId2:amount2, dishId3:amount3 ...)
+        var array = listOfComponents.split(" ");
 
-        alert(listOfComponents);
-
+        // now I create final assosiative array like: key => value
+        var i = 0;
+        var components = {};
+        for (i=0; i<array.length; i++)
+        {
+            var id_amount = array[i].split(":");
+            components[id_amount[0]] = id_amount[1];
+        }
+    
         var apiUrl = 'http://localhost/YourDiet';
         $.ajax({
             url : apiUrl + '/?page=addDish',
@@ -71,22 +84,24 @@ $(document).ready(function(){
                 preparationTime : preparationTime,
                 description : description,
                 file : file,
-                listOfComponents : listOfComponents
+                components : JSON.stringify(components)
             }
         })
         .done(function(res) {
             // parseJSON convert string of JSON to JS, stringify turns JS object to JSON string 
             var result = $.parseJSON(JSON.stringify(res));  
             alert(result.message);
-
+            $("#createDishButton").prop("disabled", false);
             if(result.status) {
-
+                $(".leftBox").find("#name, #preparationTime, #file, #description").val("");
+                $(".leftBox").find(".component").remove();
             } else {
                 $("#name").focus();
             }
         })
         .fail(function (jqXHR, textStatus, error) {
             console.log("Error: " + error);
+            $("#createDishButton").prop("disabled", false);  // i need that?
         });
     });
 
@@ -113,6 +128,7 @@ $(document).ready(function(){
                 
                 newComponent.find(".componentId").val(component.id_component);
                 newComponent.find(".componentName").text(component.name);
+                newComponent.find(".componentUnit").text(component.unit);
             });
         })
         .fail(function (jqXHR, textStatus, error) {
@@ -124,12 +140,14 @@ $(document).ready(function(){
     $(".container-fluix").on('click', '.plus', function(){
         var id_dish = $(this).parent().find(".componentId").val();
         var name = $(this).parent().find(".componentName").text();
+        var unit = $(this).parent().find(".componentUnit").text();
 
         var component = $("#dishComponents").find("template").contents().clone(true);
         $("#dishComponents").append(component);    // we have to use contents(), function childrens() doesn't work well
         
         component.find(".componentId").val(id_dish);
         component.find(".componentName").text(name);
+        component.find(".componentUnit").text(unit);
     });
 
     $(".container-fluix").on('click', ".minus", function(){
@@ -138,4 +156,3 @@ $(document).ready(function(){
 
 
 });
-

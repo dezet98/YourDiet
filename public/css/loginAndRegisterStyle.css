@@ -46,11 +46,14 @@ form
     top: 15%;
 }
 
-label
-{    
+#messages
+{
     width: 80%;
-    color: #3b3939;
-    font-size: 120%;
+    text-align: center;
+    font-size: 110%;
+    color: #ffffff;
+    background-color: #3b3939;
+    margin-bottom: 5%;
 }
 
 .textInput

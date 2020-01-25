@@ -13,15 +13,17 @@ class UserRepository extends Repository {
         $email = $user->getEmail();
         $password = $user->getPassword();
         $nickname = $user->getNickname();
+        $role = $user->getRole();
 
         try {
             $stmt = $this->database->connect()->prepare("
-            INSERT INTO user (email, password, nickname) 
-            VALUES (:email, :password, :nickname);
+            INSERT INTO user (email, password, nickname, role) 
+            VALUES (:email, :password, :nickname, :role);
             ");
             $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->bindParam(':password', $password, PDO::PARAM_STR);
             $stmt->bindParam(':nickname', $nickname, PDO::PARAM_STR);
+            $stmt->bindParam(':role', $role, PDO::PARAM_STR);
 
             $stmt->execute();
         }
@@ -47,7 +49,7 @@ class UserRepository extends Repository {
                 return null;
             }
 
-            return new User($user['email'], $user['password'], $user['nickname'], $user['id_user']);
+            return new User($user['email'], $user['password'], $user['nickname'], $user['role'], $user['id_user']);
         }
         catch(PDOException $e)
         {
@@ -157,10 +159,13 @@ class UserRepository extends Repository {
         }
     }
     
-    public function createDish(string $id_user, string $name, string $preparationTime, string $file, string $description, string $listOfComponents)
+    public function createDish(string $id_user, string $name, string $preparationTime, string $file, string $description, string $componentsArrayJSON)
     {
         try{
-            $stmt = $this->database->connect()->prepare("
+            $conn = $this->database->connect();
+            //$conn->beginTransaction();
+
+            $stmt = $conn->prepare("
             INSERT INTO dish (id_dish, id_user, name, description, preparationTime, image) VALUES (NULL, :id_user, :name, :description, :preparationTime, :file);
             ");
             $stmt->bindParam(':id_user', $id_user, PDO::PARAM_INT);
@@ -169,23 +174,73 @@ class UserRepository extends Repository {
             $stmt->bindParam(':file', $file, PDO::PARAM_STR);
             $stmt->bindParam(':description', $description, PDO::PARAM_STR);
 
-            $arrayOfComponents = explode(' ', $listOfComponents);
-            $id_dish = $stmt->lastInsertId();
-            foreach($arrayOfComponents as $id_component)
+            $stmt->execute();
+
+            $components = json_decode($componentsArrayJSON); 
+            $id_dish = $conn->lastInsertId();
+
+            foreach($components as $id_component => $amount)
             {
-            $stmt = $this->database->connect()->prepare("
-            INSERT INTO dishcomponent (id_dishComponent, id_dish, id_component, amount) VALUES (NULL, :id_dish, :id_component, 1);
-            ");
-            $stmt->bindParam(':id_dish', $id_dish, PDO::PARAM_INT);
-            $stmt->bindParam(':id_component', $id_component, PDO::PARAM_INT);
+                $stmt = $this->database->connect()->prepare("
+                INSERT INTO dishcomponent (id_dishComponent, id_dish, id_component, amount) VALUES (NULL, :id_dish, :id_component, :amount);
+                ");
+                $stmt->bindParam(':id_dish', $id_dish, PDO::PARAM_INT);
+                $stmt->bindParam(':id_component', $id_component, PDO::PARAM_INT);
+                $stmt->bindParam(':amount', $amount, PDO::PARAM_STR);   //str because amount is float, so probably I don't have exit
+                $stmt->execute();
             }
 
+            //$conn->commit();  
+        }
+        catch(PDOException $e)
+        {
+            //$conn->rollback();
+            die("Error: " . $e->getMessage());
+        }  
+    }
+
+    public function searchDishes(string $cry, string $email)
+    {
+        try{
+            $result = [];
+            $name = "%$cry%";
+            $stmt = $this->database->connect()->prepare("
+                SELECT dish.* FROM dish, user 
+                WHERE user.id_user = dish.id_user AND user.email = :email AND dish.name 
+                LIKE :name
+                LIMIT 20;
+            ");
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+
             $stmt->execute();
+
+            $dishes = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            
+            if($dishes == false) 
+            {
+                return null;
+            }
+
+            foreach ($dishes as $dish) {
+                $result[] = new Dish(
+                    $dish['id_user'],
+                    $dish['name'],
+                    $dish['preparationTime'],
+                    $dish['description'],
+                    $dish['image'],
+                    $dish['id_dish']
+                );
+            }
+
+            return $result;
         }
         catch(PDOException $e)
         {
             die("Error: " . $e->getMessage());
-        }  
+        }
+
+
     }
 
     public function addDishToDay(int $id_dish, int $id_day): void
@@ -311,7 +366,6 @@ class UserRepository extends Repository {
         {
             die("Error: " . $e->getMessage());
         }
-
 
     }
 

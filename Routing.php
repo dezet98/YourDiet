@@ -15,11 +15,13 @@ class Routing
     {
         $this->routes = [
             'start' => ['controller' => 'DefaultController', 'action' => 'start'],
+            'register' => ['controller' => 'RegisterController', 'action' => 'register'],
             'login' => ['controller' => 'LoginController', 'action' => 'login'],
             'logOut' => ['controller' => 'LoginController', 'action' => 'logOut'],
-            'register' => ['controller' => 'RegisterController', 'action' => 'register'],
-            'yourSchedule' => ['controller' => 'YourScheduleController', 'action' => 'getDishes'],
+            'yourSchedule' => ['controller' => 'YourScheduleController', 'action' => 'yourSchedule'],
+            'searchDishes' => ['controller' => 'YourScheduleController', 'action' => 'searchDishes'],
             'addToSchedule' => ['controller' => 'YourScheduleController', 'action' => 'addToSchedule'],
+            'updateSchedule' => ['controller' => 'YourScheduleController', 'action' => 'updateSchedule'],
             'removeFromSchedule' => ['controller' => 'YourScheduleController', 'action' => 'removeFromSchedule'],
             'admin' => ['controller' => 'AdminController', 'action' => 'index'],
             'adminUsers' => ['controller' => 'AdminController', 'action' => 'getUsers'],

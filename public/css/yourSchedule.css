@@ -22,92 +22,6 @@
     z-index: -1; 
 }
 
-.mobileMenu
-{
-    display: none;
-    width: 100%;
-    height: 6%;
-    background-color: #3b3939;
-}
-
-.mobileMenu label
-{
-    color: #FFFFFF;
-}
-
-.mobileMenu button
-{
-    color: black;
-}
-
-.menu
-{
-    position: fixed;
-    float: left;
-    height: 100%;
-    width: 15%;
-    left: 0;
-    background-color: #EBE9E9;
-    border: 1px solid #707070;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.menu .logo
-{
-    width: 90%;
-    margin-top: 30%;
-}
-
-.menu .subpages
-{
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 70%;
-}
-
-.menu .subpages a
-{
-    text-decoration: none;
-}
-
-.menu .subpages .submitInput
-{
-    width: 100%;
-    text-align: center;
-    font-size: 95%;
-    margin-bottom: 13%;
-    border-radius: 0;
-    border: none;
-    list-style-type: none;
-}
-
-.menu .logOut
-{
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-}
-
-.menu .logOut input
-{
-    width: 100%;
-    background: #707070;
-    padding: 5%;
-    border: 1px solid #707070;
-    font-size: 100%;
-    color: #FFFFFF;
-    cursor: pointer;
-}
-
-.menu .logOut input:hover
-{  
-    background: #3b3939;
-}
-
 .modal
 {
     position: absolute;
@@ -119,14 +33,77 @@
 
 .modal .content
 {
+    position: relative;
     background-color: #FFFFFF;
-    width: 80%;
-    height: 80%;
-    margin: 10% auto;
-    padding: 20px;
+    width: 90%;
+    height: 90%;
+    margin: 3% 5%;
+    padding: 2%;
     border: 1px solid #707070;
 }
 
+.modal .content .closeModal
+{
+  position: absolute;
+  top: 0.6%;
+  right: 0.6%;
+  font-size: 300%;
+  cursor: pointer;
+}
+
+.modal .content #photo
+{
+  width: 40%;
+  height: 70%
+}
+
+.modal .content #names
+{
+    width: 40%;
+    height: 30%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 1% 3%;
+    border: 1px solid;
+    border-top: none;
+}
+
+.modal .content #des
+{
+
+  width: 53%;
+  height: 94%;
+  position: absolute;
+  top: 3%;
+  right: 4%;
+  padding: 3%;
+  border: 1px solid;
+}
+
+.modal .content #dishImg
+{
+    object-fit: cover; 
+    width: 100%;
+    height: 100%;
+}
+
+.modal .content #name
+{
+  font-size: 300%;
+}
+
+.modal .content #preparationTime
+{
+  font-size: 200%;
+  text-align: left;
+}
+
+.modal .content #calories
+{
+  font-size: 200%;
+  text-align: left;
+}
 
 .leftBox
 {
@@ -167,7 +144,6 @@
     display: flex;
     flex-wrap: wrap;
     height: 95%;
-    padding: 4%;
     overflow: auto;
     
 }
@@ -179,7 +155,8 @@
     height: 20%;
     border: 1px solid black;
     padding: 4%;
-    margin: 5%;
+    margin: auto;
+    margin-bottom: 10%;
 } 
 
 .leftBox #results .dish .plus
@@ -234,16 +211,18 @@
     background-color: white;
 }
 
-.leftBox #results .dish .textBox h3
+.leftBox #results .dish .textBox .name
 {
     box-sizing: border-box;
     position: absolute;
     width: 100%;
     height: 60%;
-    top:0;
+    top: 0;
     margin: 0;
+    margin-top: 5%;
     padding: 3%;
     text-align: center;
+    font-size: 140%;
 }
 
 .leftBox #results .dish .textBox .preparationTime
@@ -254,7 +233,7 @@
     height: 45%;
     bottom: 0;
     margin: 0;
-    padding: 5%;
+    padding: 3%;
     text-align: center;
 }
 
@@ -277,6 +256,7 @@
     height: 110%;
     padding: 0;
     overflow: auto;
+    background-color: #EBE9E9;
 }
 
 .rightBox .daysSlider 
@@ -399,16 +379,18 @@
     background-color: white;
 }
 
-.rightBox #schedule .dish .textBox h3
+.rightBox #schedule .dish .textBox .name
 {
     box-sizing: border-box;
     position: absolute;
     width: 100%;
     height: 60%;
-    top:0;
+    top: 0;
     margin: 0;
+    margin-top: 3%;
     padding: 3%;
     text-align: center;
+    font-size: 140%;
 }
 
 .rightBox #schedule .dish .textBox .preparationTime
@@ -436,40 +418,45 @@
 
 @media only screen and (max-width: 768px)
 {
-    .mobileMenu
-    {
-        display: inline-block;
-    }
-
     .container-fluix
     {
         width: 100%;
     }
 
-    .menu
+    .modal .content
     {
-        transform: translateX(-100%);
-        width: 50%;
-        z-index: 1; 
+        padding: 0;
     }
 
-    .menu .menuLogo
+    .modal .content .closeModal
     {
-        width: 70%;
-        margin-top: 15%;
+        top: 0.6%;
+        right: 2%;
+        font-size: 250%;
+        color: white;
     }
 
-    .menuList .submitInput
+    .modal .content #photo
     {
-        font-size: 95%;
-        margin-bottom: 2%;
+        width: 100%;
+        height: 50%
     }
 
-    .menuLogOut
+    .modal .content #names
     {
-        margin-bottom: 14%;
+        width: 100%;
+        height: 15%;
+        font-size: 70%;
+        border: none;
     }
 
+    .modal .content #des
+    {
+        position: static;
+        height: 35%;
+        width: 100%;  
+        border: none;
+    }
     .leftBox .search
     {
         width: 100%;

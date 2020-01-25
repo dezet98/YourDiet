@@ -3,14 +3,15 @@
         die("Nie jesteś zalogowany!");
     }
 
-    if(!in_array('ROLE_USER', $_SESSION['role'])) {
+    if($_SESSION['role'] != 'ROLE_USER' && $_SESSION['role'] != 'ROLE_ADMIN') {
+        echo($_SESSION['role']);
         die("Nie masz uprawnień aby być na tej stronie!");
     }
 ?>
 
+
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,26 +21,29 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="public/css/globalStyle.css" type="text/css"/>
+    <link rel="stylesheet" href="public/css/menuStyle.css" type="text/css"/>
     <link rel="stylesheet" href="public/css/yourSchedule.css" type="text/css"/>
 </head>
 
 <body>
     <div class="mobileMenu"> 
-        <button id="menu-trigger" onclick="menuTrigger()"> ham </button>
-        <label> Twój plan <label>
+        <i class="fa fa-bars menu-trigger" onclick="menuTrigger()"></i>
+        <label> Twój plan </label>
         <button id="changeContent" onclick="changeBox()">Plan dnia</button>
     </div>
-
+    
     <div class="menu"> 
         <div class="logo">
             <img class="imgLogo" style="width: 100%; height: auto;" src="public/img/fullLogo.png" alt="logo"/>
         </div>
         <div class="subpages">
-            <a class="submitInput" href="#">Twój plan</a>
+            <a class="submitInput" href="?page=yourSchedule">Twój plan</a>
             <a class="submitInput" href="#">Lista zakupów</a>
             <a class="submitInput" href="?page=createDish">Stwórz danie</a>
             <a class="submitInput" href="#">Szukaj dania</a>
-            <a class="submitInput" href="#">Porady</a>
+            <?php if ($_SESSION['role'] == 'ROLE_ADMIN')
+                echo "<a class='submitInput' href='?page=admin'>Panel admina</a>";
+            ?>
         </div>
         <div class="logOut">
             <form action="?page=logOut" method="POST">
@@ -55,43 +59,50 @@
             <div id="modalId" class="modal">
                 <div class="content">
                     <i class="fa fa-times closeModal"> </i>
-                    <img id="dishImg" alt="img" onerror="this.src='public/img/uploads/food10.jpg'" style="width: 30%; height: auto;"> </img>
-                    <h1 id="name"> </h1>
-                    <h4 id="preparationTime"> </h4>
-                    <h4 id="calories"> </h4>
-                    <label> </label>
+                    <div id="photo">
+                        <img id="dishImg" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
+                    </div>
+                    <div id="names">
+                        <label id="name"> </label>
+                        <label id="preparationTime"> </label>
+                        <label id="calories"> </label>
+                    </div>
+                    <div id="des">
+                        <p id="description"> </p>
+                    </div>
                 </div>
             </div>
+
             <div class="col-xs-10 col-sm-6 col-xs-offset-1 leftBox">
                 <div class="search"> 
                     <input id="text" type="text" placeholder="Szukaj dania"></input><!--
                     --><button id="searchButton" >Szukaj</button>
                 </div>
                 <div id="checkbox">
-                    <input type="checkbox">Podstawowe produkty</button>
+                    <input type="checkbox">Nasze dania</button>
                 </div>
                 <div id="results">
-
-                    <?php if(isset($dishes)) foreach($dishes as $dish) { ?>
+                    <template>
                         <div class="dish">
-                            <i class="fa fa-plus plus"> </i>
-                            <i class="fa fa-eye eye"> </i>
-                            <input class="dishId" type="hidden" name="dishId" value="<?= $dish->getId_dish() ?>" />
-                            <div class="imgBox">
-                                <img class="dishImg" src="public/img/uploads/<?= $dish->getImage(); ?>" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
-                            </div>
-                            <div class="textBox">
-                                <h3 class="name"> <?= $dish->getName(); ?> </h3>
-                                <h5 class="preparationTime"> <?= $dish->getPreparationTime(); ?> </h5>
-                                <h5 class="calories"> *350cal </h5>
-                            </div>
+                                <i class="fa fa-plus plus"> </i>
+                                <i class="fa fa-eye eye"> </i>
+                                <input class="dishId" type="hidden"/>
+                                <div class="imgBox">
+                                    <img class="dishImg" src="public/img/uploads/" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
+                                </div>
+                                <div class="textBox">
+                                    <label class="name"> </label>
+                                    <label class="preparationTime"> </label>
+                                    <label class="calories"> *350cal </label>
+                                    <input class="description" type="hidden"/>
+                                </div>
                         </div>
-                    <?php } ?>
-
+                    </template>
                 </div>       
             </div>
 
             <div class="col-xs-10 col-sm-3 col-xs-offset-1 rightBox">
+                <label id="status"> </label> 
                 <div class="daysSlider">
                     <i class="fa fa-angle-left arrow" onclick="nextDay(-1)" style="font-size: 40px;"> </i>
                     <label id="dayName" mouseover="hoverDay()"> </label>
@@ -102,51 +113,34 @@
                     --><button id="statisticsButton" class="off" type="submit" onclick="openTab('statistics')">Statystyka</button>
                 </div>
                 <div id="schedule"  class="tab">
-
-                    <?php if(isset($dishesOfDay)) foreach($dishesOfDay as $dishOfDay) { ?>
-                        <div class="dish">
-                            <i class="fa fa-minus minus"> </i>
-                            <i class="fa fa-eye eye"> </i>
-                            <input class="dishId" type="hidden" name="dishId" value="<?= $dishOfDay->getId_dish() ?>" />
-                            <div class="imgBox">
-                                <img class="dishImg" src="public/img/uploads/<?= $dishOfDay->getImage(); ?>" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
-                            </div>
-                            <div class="textBox">
-                                <h3 class="name"> <?= $dishOfDay->getName(); ?> </h3>
-                                <h5 class="preparationTime"> <?= $dishOfDay->getPreparationTime(); ?> </h5>
-                                <h5 class="calories"> *350cal </h5>
-                            </div>
-                        </div>
-                    <?php } ?>
-
-                    <!-- we use this template for create dynamically new divs:   --> 
                     <template>
                         <div class="dish">
                             <i class="fa fa-minus minus"> </i>
                             <i class="fa fa-eye eye"> </i>
                             <input class="dishId" type="hidden" name="dishId" />
                             <div class="imgBox">
-                                <img class="dishImg" src="public/img/uploads/nazwa" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
+                                <img class="dishImg" src="public/img/uploads/" alt="img" onerror="this.src='public/img/uploads/food10.jpg'"> </img>
                             </div>
                             <div class="textBox">
-                                <h3 class="name"> Name </h3>
-                                <h5 class="preparationTime"> proparationTime </h5>
-                                <h5 class="calories"> calories</h5>
+                                <label class="name"> </label>
+                                <label class="preparationTime"> </label>
+                                <label class="calories"> </label>
+                                <input class="description" type="hidden"/>
                             </div>
                         </div>
                     </template>
                 </div>
                 <div id="statistics" class="tab" style="display: none;">
-                    <h5> tluszcze </h5>
+                    <h5> Kalorie: </h5>
+                    <h5> Tłuszcze: </h5>
+                    <h5> Białka: </h5>
                 </div>
             </div>
-
         </div>
     </div>
 
     <script src="public/js/yourSchedule.js"></script>
-</body>
-      
+</body>   
 </html>
   
   

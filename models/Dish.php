@@ -1,6 +1,7 @@
 <?php
 
-class Dish {
+class Dish implements JsonSerializable
+{
     private $id_dish;
     private $id_user;
     private $name;
@@ -46,6 +47,20 @@ class Dish {
     public function getImage(): string
     {
         return $this->image;
+    }
+
+    public function jsonSerialize()
+    {
+        $json = array(
+            'id_user' => $this->getId_user(),
+            'name' => $this->getName(),
+            'preparationTime' => $this->getPreparationTime(),
+            'description' => $this->getDescription(),
+            'image' => $this->getImage(),
+            'id_dish' => $this->getId_dish()
+        );
+
+        return $json;
     }
 }
 

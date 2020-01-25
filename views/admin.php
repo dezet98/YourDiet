@@ -1,3 +1,13 @@
+<?php
+    if(!isset($_SESSION['id'], $_SESSION['role'])) {
+        die("Nie jesteś zalogowany!");
+    }
+
+    if($_SESSION['role'] != 'ROLE_ADMIN') {
+        die("Nie masz uprawnień aby być na tej stronie!");
+    }
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -15,6 +25,14 @@
 <body>
     <div class="container">
         <div class="col-6">
+            <button class="btn-primary btn-lg ml-0" type="button">
+                Get all users    
+            </button>
+            
+            <a href="?page=yourSchedule" style="text-decoration: none;">
+                <button class="btn-primary btn-lg ml-0">Wróć do YourSchedule</button>
+            </a>
+            
             <table class="table mt-4 text-light">
                 <thead>
                     <tr>
@@ -23,20 +41,16 @@
                     <th scope="col">Nickname</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                    <th scope="row"><?= $user->getId_user(); ?></th>
-                    <td><?= $user->getEmail(); ?></td>
-                    <td><?= $user->getNickname(); ?></td>
-                    </tr>
-                </tbody>
-                <tbody class="users">
+                <tbody id="allUsers">
+                    <template>
+                        <tr id="row">
+                        <th id="id_user"> </th>
+                        <td id="email"> </td>
+                        <td id="nickname"> </td>
+                        </tr>
+                    </template>
                 </tbody>
             </table>
-            <button class="btn-primary btn-lg ml-0" type="button">
-                Get all users    
-            </button>
-            <label> <label>
         </div>
     </div>
 

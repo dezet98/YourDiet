@@ -3,14 +3,14 @@
         die("Nie jesteś zalogowany!");
     }
 
-    if(!in_array('ROLE_USER', $_SESSION['role'])) {
+    if($_SESSION['role'] != 'ROLE_USER' && $_SESSION['role'] != 'ROLE_ADMIN') {
+        echo($_SESSION['role']);
         die("Nie masz uprawnień aby być na tej stronie!");
     }
 ?>
 
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,16 +20,16 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="public/css/globalStyle.css" type="text/css"/>
+    <link rel="stylesheet" href="public/css/menuStyle.css" type="text/css"/>
     <link rel="stylesheet" href="public/css/createDish.css" type="text/css"/>
 </head>
 
 <body>
     <div class="mobileMenu"> 
-        <button id="menu-trigger" onclick="menuTrigger()"> ham </button>
-        <label> Twój plan <label>
-        <button id="changeContent" onclick="changeBox()">Plan dnia</button>
+        <i class="fa fa-bars menu-trigger" onclick="menuTrigger()"></i>
+        <label> Twój plan </label>
+        <button id="changeContent" onclick="changeBox()">Stwórz Danie</button>
     </div>
-
 
     <div class="menu"> 
         <div class="logo">
@@ -51,27 +51,27 @@
 
 
 
+
     <div class="container-fluix">
         <div class="row" style="height: 85%;">
-            <label>
-                    <?php
-                        if(isset($messages))
-                        {
-                            foreach($messages as $message)
-                            {
-                                echo $message;
-                            }
-                        }
-                    ?>
-            </label>
             <div class="col-xs-10 col-sm-6 col-xs-offset-1 leftBox">
-               <!-- <form action="?page=addDish" method="POST"> -->
-                    <label> Nazwa: </label>
+                <div id="nameBox">
+                    <label> Nazwa dania: </label>
                     <input type="text" id="name" />
-                    <label> Czas wykonania: </label>
+                </div>
+                <div id="preparationTimeBox">
+                    <label> Przypuszczalny czas wykonania: </label>
                     <input type="text" id="preparationTime" />
-                    <label> Załaduj zdjęcie: </label>
-                    <input type="file" id="file"/>
+                </div>
+                <div id="imageBox">
+                    <label> Możesz załadować zdjęcie dania: </label>
+                    <input type="file" id="file" value="Wybierz zdjęcie"/>
+                </div>
+                <div id="descriptionBox">
+                    <label> Opisz sposób przygotowania: </label>
+                    <textarea rows="4" cols="40" id="description"> </textarea>
+                </div>
+                <div id="componentBox">
                     <label> Składniki: </label>
                     <div id="dishComponents">
                         <template>
@@ -79,18 +79,18 @@
                                 <i class="fa fa-minus minus"> </i>
                                 <!--<i class="fa fa-eye eye"> </i>-->
                                 <input class="componentId" type="hidden"/>
-                                <h3 class="componentName"> </h3>
+                                <label class="componentName"> </label>
+                                <input type="number" class="amount" min="0" value="0" step="0.01" /> 
+                                <label class="componentUnit"> </label>
                             </div>
                         </template> 
                     </div> 
-                    <label> Sposób przygotowania: </label>
-                    <textarea rows="4" cols="40" id="description"> </textarea>
-                    <button id="createDishButton"> "Stwórz danie" </button>
-                <!--</form>-->
+                </div>
+                <button id="createDishButton"> "Stwórz danie" </button>
             </div>
 
             <div class="col-xs-10 col-sm-3 col-xs-offset-1 rightBox">
-                <label> Dodaj składniki: </label>
+                <h5> Dodaj składniki: </h5>
                 <div class="search"> 
                     <input id="text" type="text" placeholder="Szukaj dania"></input><!--
                     --><button id="searchButton" >Szukaj</button>
@@ -101,15 +101,14 @@
                             <i class="fa fa-plus plus"> </i>
                             <!--<i class="fa fa-eye eye"> </i>-->
                             <input class="componentId" type="hidden" />
-                            <h3 class="componentName"> </h3>
+                            <input class="componentUnit" type="hidden" />
+                            <label class="componentName"> </label>
                         </div>
                     </template> 
                 </div>  
-
             </div>
         </div>
     </div>
-
 
     <script src="public/js/createDish.js"></script>
 </body>

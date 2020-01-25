@@ -4,6 +4,7 @@ require_once 'AppController.php';
 require_once __DIR__.'//..//Models//User.php';
 require_once __DIR__.'//..//Repository//UserRepository.php';
 
+
 class RegisterController extends AppController
 {
     public function __construct()
@@ -21,14 +22,24 @@ class RegisterController extends AppController
             $nickname = $_POST['nickname'];
             $password = $_POST['password'];
 
+            if(ltrim($email) === '' || ltrim($nickname) === '' || ltrim($password) === '')
+            {
+                return $this->render('register', ['messages' => ['Uzupełnij wszystkie pola']]);
+            }
+
+
             $userExist = $userRepository->getUser($email);
 
-            if ($userExist) 
+            if($userExist) 
             {
                 return $this->render('register', ['messages' => ['Użytkownik o podanym adresie już istnieje']]);
             }
-  
-            $user = new User($email, $password, $nickname, 1);  // you have to deal with id_plan in future
+            
+            $key = 'c1isvFdxMDdmjOlvxpecFw';
+            $password_keyed = hash_hmac("sha256", $password, $key);
+            $password_hashed = password_hash($password_keyed, PASSWORD_ARGON2ID);
+
+            $user = new User($email, $password_hashed, $nickname, "ROLE_USER");  
             $userRepository->createUser($user);
 
             return $this->render('login', ['messages' => ['Rejestracja przebiegła pomyślnie']]);
@@ -36,7 +47,7 @@ class RegisterController extends AppController
         
         return $this->render('register');
     }
-
 }
 
 ?>
+

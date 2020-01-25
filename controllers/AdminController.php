@@ -19,9 +19,11 @@ class AdminController extends AppController
 
     function getUsers()
     {
-         echo $_POST["idDZ"];
+        $userRepository = new UserRepository();
+        
+        $users = $userRepository->getUsers();
+        echo json_encode((array)$users);
     }
-
 }
 
 

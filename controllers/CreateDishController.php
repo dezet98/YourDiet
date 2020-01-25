@@ -15,7 +15,22 @@ class CreateDishController extends AppController
 
         $this->render('createDish');
     }
- 
+ /*
+    public function addDish() 
+    {
+        $userRepository = new UserRepository();
+        $name ="kaczka";
+        $preparationTime = "30min";
+        $file = "food";
+        $description = "dsadasdasd";
+        $listOfComponents = array(1 => 3, 1=> 3, 2=>1);
+
+        $user = $userRepository->getUser($_SESSION['id']);
+        $newDishId = $userRepository->createDish($user->getId_user(), $name, $preparationTime, $file, $description, $listOfComponents);
+
+        $this->render('createDish', ['messages' => ["ok"]]);
+    }*/
+
     public function addDish() 
     {
         $name = $_POST['name'];
@@ -34,10 +49,10 @@ class CreateDishController extends AppController
             $preparationTime = $_POST['preparationTime'];
             $file = $_POST['file'];
             $description = $_POST['description'];
-            $listOfComponents = $POST['listOfComponents'];
+            $componentsArrayJSON = $_POST['components'];
 
             $user = $userRepository->getUser($_SESSION['id']);
-            $newDishId = $userRepository->createDish($user->getId_user(), $name, $preparationTime, $file, $description, $listOfComponents);
+            $newDishId = $userRepository->createDish($user->getId_user(), $name, $preparationTime, $file, $description, $componentsArrayJSON);
             
             $value = array(
                 'message' => "Danie zostało stworzone poprawnie!",

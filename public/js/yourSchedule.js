@@ -49,26 +49,54 @@ function changeBox() {
 
 // when user click arrow for change day:
 var selectedDay = new Date();
+var today = new Date();
 var days = ["Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota", "Niedziela"];
 changeDay()
 
 function nextDay(x) {
     selectedDay.setDate(selectedDay.getDate()+x);
-
-
+    
     $(document).ready(function(){
+        $("#schedule").find("*").not("template").remove(); 
+        var date = formatDate(selectedDay);
 
+        var apiUrl = 'http://localhost/YourDiet';
+        $.ajax({
+            url : apiUrl + '/?page=updateSchedule',
+            method : "POST",
+            dataType : 'json',
+            data : {
+                date : date
+            }
+        })
+        .done(function(res) {
+            var dishesFromDay = $.parseJSON(JSON.stringify(res));
+
+            // display dishes which I found:
+            dishesFromDay.forEach(dish => {
+                var newDish = $("#schedule").find("template").contents().clone(true);
+                $("#schedule").append(newDish);    // we have to use contents(), function childrens() doesn't work well
+                
+                newDish.find(".dishId").val(dish.id_dish);
+                newDish.find(".dishImg").attr("src", "public/img/uploads/" + dish.image);
+                newDish.find(".name").text(dish.name);
+                newDish.find(".preparationTime").text(dish.preparationTime);
+                newDish.find(".calories").text("350kcal");
+                newDish.find(".description").val(dish.description);
+            });
+        })
+        .fail(function (jqXHR, textStatus, error) {
+            console.log("Error: " + error);
+        });
 
 
     });
-
-
 
     changeDay();
 }
 
 function changeDay() {
-    document.getElementById("dayName").innerHTML = days[selectedDay.getDay()-1];
+    document.getElementById("dayName").innerHTML = days[selectedDay.getDay()] + "  " + formatDate(selectedDay);
 }
 
 function hoverDay() {
@@ -124,12 +152,14 @@ $(document).ready(function(){
         var name = $(this).parent().find(".name").text();
         var preparationTime = $(this).parent().find(".preparationTime").text();
         var calories = $(this).parent().find(".calories").text();
+        var description = $(this).parent().find(".description").val();
 
-        $(".content").find("#dishImg").attr("src", imageSrc);
-        $(".content").find("#name").text(name);
-        $(".content").find("#preparationTime").text(preparationTime);
-        $(".content").find("#calories").text(calories);
-        
+        $(".modal .content").find("#dishImg").attr("src", imageSrc);
+        $(".modal .content").find("#name").text(name);
+        $(".modal .content").find("#preparationTime").text(preparationTime);
+        $(".modal .content").find("#calories").text(calories);
+        $(".modal .content").find("#description").text(description);
+
         $(".modal").show();
     });
 
@@ -143,62 +173,120 @@ $(document).ready(function(){
         }
     });
 
-    $(".plus").click(function(){
-        var id_dish = $(this).parent().find(".dishId").val();
-        var date = formatDate(selectedDay);
-        var imageSrc = $(this).parent().find(".dishImg").attr('src');
-        var name = $(this).parent().find(".name").text();
-        var preparationTime = $(this).parent().find(".preparationTime").text();
-        var calories = $(this).parent().find(".calories").text();
+    $(".container-fluix").on("click", ".plus", function(){
+        var todayTime = today.getTime();
+        if(todayTime <= selectedDay.getTime())
+        {
+            $("#status").text("Dodaje do dnia...");
 
-        var newDish = $("template").contents().clone(true);
-        $("#schedule").append(newDish);    // we have to use contents(), function childrens() doesn't work well
-        
-        newDish.find(".dishId").val(id_dish);
-        newDish.find(".dishImg").attr("src", imageSrc);
-        newDish.find(".name").text(name);
-        newDish.find(".preparationTime").text(preparationTime);
-        newDish.find(".calories").text(calories);
+            var id_dish = $(this).parent().find(".dishId").val();
+            var date = formatDate(selectedDay);
+            var imageSrc = $(this).parent().find(".dishImg").attr('src');
+            var name = $(this).parent().find(".name").text();
+            var preparationTime = $(this).parent().find(".preparationTime").text();
+            var calories = $(this).parent().find(".calories").text();
+            var description = $(this).parent().find(".description").val();
 
-        
-        var apiUrl = 'http://localhost/YourDiet';
-        $.ajax({
-            url : apiUrl + '/?page=addToSchedule',
-            method : "POST",
-            data : {
-                id_dish : id_dish,
-                date : date
-            }
-        })
-        .fail(function (jqXHR, textStatus, error) {
-            console.log("Error: " + error);
-        });
-
+            var newDish = $("#schedule").find("template").contents().clone(true);
+            $("#schedule").append(newDish);    // we have to use contents(), function childrens() doesn't work well
+            
+            newDish.find(".dishId").val(id_dish);
+            newDish.find(".dishImg").attr("src", imageSrc);
+            newDish.find(".name").text(name);
+            newDish.find(".preparationTime").text(preparationTime);
+            newDish.find(".calories").text(calories);
+            newDish.find(".description").val(description);
+            
+            var apiUrl = 'http://localhost/YourDiet';
+            $.ajax({
+                url : apiUrl + '/?page=addToSchedule',
+                method : "POST",
+                data : {
+                    id_dish : id_dish,
+                    date : date
+                }
+            })
+            .done(function(res) {
+                $("#status").text("Zapisano!");
+                setTimeout(function(){$("#status").text("");}, 500);
+            })
+            .fail(function (jqXHR, textStatus, error) {
+                console.log("Error: " + error);
+            });
+        }  else {
+            alert("Nie możesz dodać dań do dni które już mineły");
+        }
     });
 
 
     $("#schedule").on("click", ".minus", function(){
-        
-        var id_dish = $(this).parent().find(".dishId").val();
-        $(this).parent().remove();  // in this case $(this).parent() give us ".dish"
+        var todayTime = today.getTime();
+        if(todayTime <= selectedDay.getTime())
+        {
+            $("#status").text("Usuwam z dnia...");
+            var id_dish = $(this).parent().find(".dishId").val();
+            $(this).parent().remove();  // in this case $(this).parent() give us ".dish"
 
-        var date = formatDate(selectedDay);
+            var date = formatDate(selectedDay);
+            var apiUrl = 'http://localhost/YourDiet';
+            $.ajax({
+                url : apiUrl + '/?page=removeFromSchedule',
+                method : "POST",
+                data : {
+                    id_dish : id_dish,
+                    date : date
+                }
+            })
+            .done(function(){
+                $("#status").text("Usunięto!");
+                setTimeout(function(){$("#status").text("");}, 500);
+            })
+            .fail(function (jqXHR, textStatus, error) {
+                console.log("Error: " + error);
+            });
+        }  else{
+            alert("Nie możesz usunąć dań w dniach które już mineły");
+        }
+    });
+
+    $(".container-fluix").on('click', '#searchButton', function(){
+        var text = $("#text").val();
+        $("#results").find("*").not("template").remove(); 
+
         var apiUrl = 'http://localhost/YourDiet';
         $.ajax({
-            url : apiUrl + '/?page=removeFromSchedule',
+            url : apiUrl + '/?page=searchDishes',
             method : "POST",
+            dataType : 'json',
             data : {
-                id_dish : id_dish,
-                date : date
+                text : text
             }
+        })
+        .done(function(res) {
+            var dishes = $.parseJSON(JSON.stringify(res));
+
+            dishes.forEach(dish => {
+                var newDish = $("#results").find("template").contents().clone(true);
+                $("#results").append(newDish);    // we have to use contents(), function childrens() doesn't work well
+                
+                newDish.find(".dishId").val(dish.id_dish);
+                newDish.find(".dishImg").attr("src", "public/img/uploads/" + dish.image);
+                newDish.find(".name").text(dish.name);
+                newDish.find(".preparationTime").text(dish.preparationTime);
+                newDish.find(".calories").text("350kcal");
+                newDish.find(".description").val(dish.description);
+            });
         })
         .fail(function (jqXHR, textStatus, error) {
             console.log("Error: " + error);
         });
-        
+
     });
 
 
+    // IMPORTAND:
+    $("#searchButton").trigger("click");
+    nextDay(0);
 
   }); 
   

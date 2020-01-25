@@ -1,0 +1,147 @@
+.mobileMenu
+{
+    display: none;
+    width: 100%;
+    height: 6%;
+    background-color: #3b3939;
+}
+
+.mobileMenu label
+{
+    position: absolute;
+    margin: 2%;
+    left: 50%;
+    margin-left: -10%;
+    font-size: 140%;
+    color: white;
+}
+
+.mobileMenu .menu-trigger
+{
+    color: white;
+    font-size: 250%;
+    margin: 1.5% 3%;
+    cursor: pointer;
+}
+
+.mobileMenu #changeContent
+{
+  position: fixed;
+  right: 0;
+  margin: 2%;
+  padding: 3px 7px;
+  color: white;
+  background-color: #3b3939;
+  border: 1px solid;
+  border-radius: 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+}
+
+.mobileMenu #changeContent:hover
+{
+  color: black;
+  background-color: white;
+}
+
+.menu
+{
+    position: fixed;
+    float: left;
+    height: 100%;
+    width: 15%;
+    left: 0;
+    background-color: #EBE9E9;
+    border: 1px solid #707070;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.menu .logo
+{
+    width: 90%;
+    margin-top: 30%;
+}
+
+.menu .subpages
+{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 70%;
+}
+
+.menu .subpages a
+{
+    text-decoration: none;
+}
+
+.menu .subpages .submitInput
+{
+    width: 100%;
+    text-align: center;
+    font-size: 95%;
+    margin-bottom: 13%;
+    border-radius: 0;
+    border: none;
+    list-style-type: none;
+}
+
+.menu .logOut
+{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}
+
+.menu .logOut input
+{
+    width: 100%;
+    background: #707070;
+    padding: 5%;
+    border: 1px solid #707070;
+    font-size: 100%;
+    color: #FFFFFF;
+    cursor: pointer;
+}
+
+.menu .logOut input:hover
+{  
+    background: #3b3939;
+}
+
+
+@media only screen and (max-width: 768px)
+{
+    .mobileMenu
+    {
+        display: inline-block;
+    }
+
+    .menu
+    {
+        transform: translateX(-100%);
+        width: 50%;
+        height: 94%;
+        z-index: 1; 
+    }
+
+    .menu .menuLogo
+    {
+        width: 70%;
+        margin-top: 15%;
+    }
+
+    .menuList .submitInput
+    {
+        font-size: 95%;
+        margin-bottom: 2%;
+    }
+
+    .menuLogOut
+    {
+        margin-bottom: 14%;
+    }
+}
