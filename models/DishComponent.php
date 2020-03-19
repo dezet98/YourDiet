@@ -1,6 +1,6 @@
 <?php
 
-class DishComponent
+class DishComponent implements JsonSerializable
 {
     private $id_dishComponent;
     private $id_dish;
@@ -33,6 +33,18 @@ class DishComponent
     public function getAmount(): int
     {
         return $this->amount;
+    }
+
+    public function jsonSerialize()
+    {
+        $json = array(
+            'id_dish' => $this->getId_dish(),
+            'id_component' => $this->getId_component(),
+            'amount' => $this->getAmount(),
+            'id_dishComponent' => $this->getId_dishComponent(),
+        );
+
+        return $json;
     }
 
 }

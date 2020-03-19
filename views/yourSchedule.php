@@ -38,7 +38,7 @@
         </div>
         <div class="subpages">
             <a class="submitInput" href="?page=yourSchedule">Twój plan</a>
-            <a class="submitInput" href="#">Lista zakupów</a>
+            <a class="submitInput" href="?page=groceryList">Lista zakupów</a>
             <a class="submitInput" href="?page=createDish">Stwórz danie</a>
             <a class="submitInput" href="#">Szukaj dania</a>
             <?php if ($_SESSION['role'] == 'ROLE_ADMIN')

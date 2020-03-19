@@ -1,0 +1,58 @@
+.container-fluix
+{
+    position: fixed;
+    right: 0;
+    width: 85%;
+    justify-content: center;
+    height: inherit;
+    align-items: center;
+}
+
+.container-fluix::after
+{
+    content: "";
+    background: url("../img/mainBackground.jfif")  center;
+    background-size: cover;
+    position: absolute;
+    opacity: 0.5;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: -1; 
+}
+
+.mainBox
+{
+    background-color: #EBE9E9;
+    margin-top: 3%;
+    height: 110%;
+    padding: 1%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+
+.mainBox .days
+{
+  display: flex; 
+}
+
+.mainBox .days .day
+{
+  color: black;
+  font-size: 120%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+
+
+@media only screen and (max-width: 768px)
+{
+    .container-fluix
+    {
+        width: 100%;
+    }
+}
+

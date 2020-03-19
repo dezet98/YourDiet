@@ -37,8 +37,8 @@
         </div>
         <div class="subpages">
             <a class="submitInput" href="?page=yourSchedule">Twój plan</a>
-            <a class="submitInput" href="#">Lista zakupów</a>
-            <a class="submitInput" href="#">Stwórz danie</a>
+            <a class="submitInput" href="?page=groceryList">Lista zakupów</a>
+            <a class="submitInput" href="?page=createDish">Stwórz danie</a>
             <a class="submitInput" href="#">Szukaj dania</a>
             <a class="submitInput" href="#">Porady</a>
         </div>
@@ -65,7 +65,7 @@
                 </div>
                 <div id="imageBox">
                     <label> Możesz załadować zdjęcie dania: </label>
-                    <input type="file" id="file" value="Wybierz zdjęcie"/>
+                    <input type="file" id="file" name="file" value="Wybierz zdjęcie"/>
                 </div>
                 <div id="descriptionBox">
                     <label> Opisz sposób przygotowania: </label>

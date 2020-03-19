@@ -6,6 +6,7 @@ require_once('controllers/RegisterController.php');
 require_once('controllers/YourScheduleController.php');
 require_once('controllers/AdminController.php');
 require_once('controllers/CreateDishController.php');
+require_once('controllers/GroceryListController.php');
 
 class Routing
 {
@@ -27,7 +28,9 @@ class Routing
             'adminUsers' => ['controller' => 'AdminController', 'action' => 'getUsers'],
             'createDish' => ['controller' => 'CreateDishController', 'action' => 'createDish'],
             'addDish' => ['controller' => 'CreateDishController', 'action' => 'addDish'],
-            'searchComponents' => ['controller' => 'CreateDishController', 'action' => 'searchComponents']
+            'searchComponents' => ['controller' => 'CreateDishController', 'action' => 'searchComponents'],
+            'groceryList' => ['controller' => 'GroceryListController', 'action' => 'groceryList'],
+            'addToGroceryList' => ['controller' => 'GroceryListController', 'action' => 'addToGroceryList']
                         ];
     }
 

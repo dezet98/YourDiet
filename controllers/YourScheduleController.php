@@ -2,14 +2,19 @@
 
 require_once 'AppController.php';
 require_once __DIR__.'//..//Models//User.php';
-require_once __DIR__.'//..//Repository//UserRepository.php';
-
+require_once __DIR__.'//..//Repository//DayRepository.php';
+require_once __DIR__.'//..//Repository//DishRepository.php';
 
 class YourScheduleController extends AppController
 {
+    private $dayRepository;
+    private $userRepository;
+
     public function __construct()
     {
-        parent::__construct();
+        parent::__construct(); 
+        $this->dayRepository = new DayRepository();
+        $this->userRepository = new UserRepository();
     }
 
     public function yourSchedule()
@@ -23,19 +28,18 @@ class YourScheduleController extends AppController
         $date =  $_POST['date'];    
         $email = $_SESSION['id'];
 
-        $userRepository = new UserRepository();
-        $dayExist = $userRepository->getDay($email, $date);
+        $dayExist = $this->dayRepository->getDay($email, $date);
 
         if($dayExist) 
         {
-            $userRepository->addDishToDay($id_dish, $dayExist->getId_day());   
+            $this->dayRepository->addDishToDay($id_dish, $dayExist->getId_day());   
         } 
         else // if user doesn't have a concrete day we have to create that day first:
         {
-            $user = $userRepository->getUser($email);   
-            $userRepository->createDay($user->getId_user(), $date);
-            $day = $userRepository->getDay($email, $date);
-            $userRepository->addDishToDay($id_dish, $day->getId_day()); 
+            $user = $this->userRepository->getUser($email);   
+            $this->dayRepository->createDay($user->getId_user(), $date);
+            $day = $this->dayRepository->getDay($email, $date);
+            $this->dayRepository->addDishToDay($id_dish, $day->getId_day()); 
         }
     }
 
@@ -45,9 +49,8 @@ class YourScheduleController extends AppController
         $date = $_POST['date'];
         $email = $_SESSION['id'];
 
-        $userRepository = new UserRepository();
-        $day = $userRepository->getDay($email, $date);
-        $userRepository->removeDishFromDay($id_dish, $day->getId_day()); 
+        $day = $this->dayRepository->getDay($email, $date);
+        $this->dayRepository->removeDishFromDay($id_dish, $day->getId_day()); 
     }
 
     public function updateSchedule()
@@ -55,12 +58,11 @@ class YourScheduleController extends AppController
         $date = $_POST['date'];    
         $email = $_SESSION['id'];
 
-        $userRepository = new UserRepository();
-        $dayExist = $userRepository->getDay($email, $date);
+        $dayExist = $this->dayRepository->getDay($email, $date);
 
         if($dayExist) 
         {
-            $dishesFromDay =  $userRepository->getDishesFromDay($email, $date); 
+            $dishesFromDay =  $this->dayRepository->getDishesFromDay($email, $date); 
             echo json_encode((array)$dishesFromDay);
         } 
     }
@@ -70,11 +72,10 @@ class YourScheduleController extends AppController
         $cry = $_POST['text'];
         $email = $_SESSION['id'];
 
-        $userRepository = new UserRepository();
-        $dishes = $userRepository->searchDishes($cry, $email);
+        $this->dishRepository = new DishRepository();
+        $dishes = $this->dishRepository->searchDishes($cry, $email);
 
         echo json_encode((array)$dishes);
     }
 }
-
 ?>

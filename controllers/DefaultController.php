@@ -16,5 +16,6 @@ class DefaultController extends AppController
     {
         return $this->render('start');
     }
+
 }
 

@@ -55,8 +55,8 @@ $(document).ready(function(){
         var name = $("#name").val();
         var preparationTime = $("#preparationTime").val();
         var description = $("#description").val();
-       
-        var file = $("#file").val();
+        var file =  $("#file").val();
+  
         // save in listOfComponents sequence: "dishId1:amount dishId2:amount2 dishId3:amount3 ..."
         var listOfComponents = $("#dishComponents").find(".componentId").map(function() {
                 return ($(this).val() + ':' + $(this).parent().find(".amount").val());
